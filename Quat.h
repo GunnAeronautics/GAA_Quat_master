@@ -20,13 +20,13 @@ public:
     PREC j;
     PREC k;
     
-    Quaternion(PREC w, PREC i, PREC j, PREC k);
-    Quaternion();
+    Quat(PREC w, PREC i, PREC j, PREC k);
+    Quat();
     
     void norm(PREC tolerance = 0.0001);
     void normTo(PREC length, PREC tolerance = 0.0001);
     void fromAngleVec(PREC angle, PREC heading, PREC elevation);
-    void fromGyro(PREC x, PREC y, PREC z);
+    void fromGyro(PREC x, PREC y, PREC z); // TODO: make this take arrays
     
     PREC getLength();
     
@@ -34,8 +34,8 @@ public:
     Quat copy();
     static Quat mult(Quat q1, Quat q2);
     static Quat rot(Quat point, Quat rotator);
-    static Quat add(Quat q1, quat q2);
-    static Quat sub(Quat q1, quat q2);
+    static Quat add(Quat q1, Quat q2);
+    static Quat sub(Quat q1, Quat q2);
 };
 
 #endif

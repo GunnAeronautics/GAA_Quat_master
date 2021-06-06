@@ -14,7 +14,7 @@ Quat::Quat(PREC w, PREC i, PREC j, PREC k){
 }
 
 Quat::Quat(){
-    Quat::Quat(1, 0, 0, 0);
+    w=0;i=0;j=0;k=0;
 }
 
 void Quat::normTo(PREC length, PREC tolerance){
@@ -59,27 +59,26 @@ void Quat::fromGyro(PREC x, PREC y, PREC z){
 }
 
 PREC getLength(){
-    retrun sqrt(w*w + i*i + j*j + k*k);
+    return sqrt(w*w + i*i + j*j + k*k);
 }
 
 Quat Quat::inverse(){
-    return Quaternion(-w, i, j ,k);
+    return Quat(-w, i, j ,k);
 }
 
 Quat Quat::copy(){
-    return Quaternion(w, i ,j ,k);
+    return Quat(w, i ,j ,k);
 }
 
-static Quat Quat::mult(Quat q1, Quat q2){
+Quat Quat::mult(Quat q1, Quat q2){
     return Quat(
-    q1.w*q2.w - q1.i*q2.i - q1.j*q2.j - q1.k*q2.k
-    q1.w*q2.i + q1.i*q2.w + q1.j*q2.k - q1.k*q2.j
-    q1.w*q1.j - q1.i*q1.k + q1.j*q2.w + q1.k*q2.i
-    q1.w*q2.k + q1.i*q2.j - q1.j*q2.i + q1.k*q2.w
-    );
+    q1.w*q2.w - q1.i*q2.i - q1.j*q2.j - q1.k*q2.k,
+    q1.w*q2.i + q1.i*q2.w + q1.j*q2.k - q1.k*q2.j,
+    q1.w*q1.j - q1.i*q1.k + q1.j*q2.w + q1.k*q2.i,
+    q1.w*q2.k + q1.i*q2.j - q1.j*q2.i + q1.k*q2.w);
 }
 
-static Quat Quat::add(Quat q1, Quat q2){
+Quat Quat::add(Quat q1, Quat q2){
     return Quat(
     q1.w + q2.w,
     q1.i + q2.i,
@@ -87,7 +86,7 @@ static Quat Quat::add(Quat q1, Quat q2){
     q1.k + q2.k);
 }
 
-static Quat Quat::sub(Quat q1, Quat q2){
+Quat Quat::sub(Quat q1, Quat q2){
     return Quat(
     q1.w - q2.w,
     q1.i - q2.i,
@@ -95,7 +94,7 @@ static Quat Quat::sub(Quat q1, Quat q2){
     q1.k - q2.k);
 }
 
-static Quat Quat::rot(Quat point, Quat rotation){
+Quat Quat::rot(Quat point, Quat rotation){
     Quat ret = mult(rotation, point);
     ret = mult(ret, rotation);
     return ret;
