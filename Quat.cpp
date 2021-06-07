@@ -74,7 +74,7 @@ Quat Quat::mult(Quat q1, Quat q2){
     return Quat(
     q1.w*q2.w - q1.i*q2.i - q1.j*q2.j - q1.k*q2.k,
     q1.w*q2.i + q1.i*q2.w + q1.j*q2.k - q1.k*q2.j,
-    q1.w*q1.j - q1.i*q1.k + q1.j*q2.w + q1.k*q2.i,
+    q1.w*q2.j - q1.i*q2.k + q1.j*q2.w + q1.k*q2.i,
     q1.w*q2.k + q1.i*q2.j - q1.j*q2.i + q1.k*q2.w);
 }
 
