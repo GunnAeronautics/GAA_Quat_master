@@ -44,8 +44,8 @@ void Quat::fromGyro(PREC x, PREC y, PREC z){
     //i found it on a stanford pdf, so it must be good
     //i dont even know what the gyro data means
     //oh also it wants radians
-    float angle = sqrt(x*x + y*y + z*z); // magnitude of rotation vector or something
-    if(angle != 0){ // can't divide by zero!
+    PREC angle = sqrt(x*x + y*y + z*z); // magnitude of rotation vector or something
+    if((float)angle != 0.f){ // can't divide by zero!
         this->w = cos(angle/2);
         this->i = x/angle * sin(angle/2);
         this->j = y/angle * sin(angle/2);
